@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '/* add your jsx  here */',
+      output: '',
+      err: ''
+    }
+    this.update = this.update.bind(this);
+  }
+  update(e) {
+    let code = e.target.value;
+    try {
+      this.setState({
+        output: window.Babel.transform(code, {
+          presets: ['es2015', 'react']
+        }).code,
+        err: ''
+      })
+    } catch(err) {
+      this.setState({err: err.message})
+    }
+  }
+  render() {
+    return (
+      <div>
+        <header>{this.state.err}</header>
+        <div class="container">
+          <textarea onChange={this.update} defaultValue={this.state.input} />
+          <pre>
+            {this.state.output}
+          </pre>
+        </div>
+      </div>
+    )
+  }
 }
+
 
 export default App;

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"problems.decorations.enabled": false,
+		"emmet.triggerExpansionOnTab": true,
+		"emmet.includeLanguages": {
+			"javascript": "html"
+		},
+		"[html]": {
+		}
+	}
+}
