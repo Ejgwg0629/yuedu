@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <div>
         <header>{this.state.err}</header>
-        <div class="container">
+        <div className="container">
           <textarea onChange={this.update} defaultValue={this.state.input} />
           <pre>
             {this.state.output}
