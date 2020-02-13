@@ -1,0 +1,11 @@
+.container {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 326px;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E18CEE;
+    background-color: #F0C7F7;
+}

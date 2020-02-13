@@ -2,8 +2,30 @@
   "name": "My First Extension",
   "version": "0.0.0.1",
   "manifest_version": 2,
-  "browser_action": {
-    "default_popup": "index.html"
+  "background": {
+    "scripts": ["background.js"]
   },
-  "content_security_policy": "script-src 'self' 'sha256-gtMrbDnvSeKglmVpNLOYAlG21IbFAn9gpHcESmzwT/0='; object-src 'self'"
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/static/js/runtime-main.js",
+        "/static/js/2.chunk.js",
+        "/static/js/main.chunk.js"
+      ],
+      "css": [
+        "App.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "management",
+    "contextMenus",
+    "https://*/*"
+  ]
 }

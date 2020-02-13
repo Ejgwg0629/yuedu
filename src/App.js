@@ -1,43 +1,38 @@
+/* global chrome */
 import React from 'react';
-import './App.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      input: '/* add your jsx  here */',
-      output: '',
-      err: ''
+      result: ""
     }
+    this.timeout = null;
     this.update = this.update.bind(this);
   }
   update(e) {
-    let code = e.target.value;
-    try {
-      this.setState({
-        output: window.Babel.transform(code, {
-          presets: ['es2015', 'react']
-        }).code,
-        err: ''
-      })
-    } catch(err) {
-      this.setState({err: err.message})
-    }
+    clearTimeout(this.timeout);
+
+    var target = e.target;
+    this.timeout = setTimeout((target) => {
+      var url = "https://www.weblio.jp/content/" + target.value;
+      var app = this;
+      chrome.runtime.sendMessage({msg: url}, (response) => {
+        app.setState({result: response});
+      });
+      target.select();
+    }, 700, target);
   }
   render() {
     return (
-      <div>
-        <header>{this.state.err}</header>
-        <div className="container">
-          <textarea onChange={this.update} defaultValue={this.state.input} />
-          <pre>
-            {this.state.output}
-          </pre>
-        </div>
+      <div className="container">
+        <input onMouseOver={(e) => {e.target.select();}} onChange={this.update}></input>
+        <div className="content">{this.state.result}</div>
       </div>
     )
   }
 }
+
 
 
 export default App;
