@@ -1,27 +1,48 @@
 {
-  "name": "My First Extension",
-  "version": "0.0.0.1",
   "manifest_version": 2,
-  "background": {
-    "scripts": ["background.js"]
+  "name": "__MSG_appName__",
+  "version": "0.0.1",
+
+  "default_locale": "en",
+  "description": "__MSG_appDescription__",
+  "icons": {
+    
   },
+
+  "browser_action": {
+    "default_icon": {
+      
+    },
+    "default_title": "yuedu",
+    "default_popup": "browser_action/main.html"
+  },
+
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background/main.js",
+      "background/livereload.js"
+    ]
+  },
+
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
       "js": [
-        "/static/js/runtime-main.js",
-        "/static/js/2.chunk.js",
-        "/static/js/main.chunk.js"
-      ],
-      "css": [
-        "App.css"
+        "content_scripts/main.js"
       ],
       "run_at": "document_end",
       "all_frames": false
     }
   ],
+
+  "options_ui": {
+    "page": "options_ui/main.html",
+    "chrome_style": true
+  },
+
   "permissions": [
     "tabs",
     "management",

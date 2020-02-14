@@ -10,10 +10,10 @@ class App extends React.Component {
     this.timeout = null;
     this.update = this.update.bind(this);
   }
-  update(e) {
+  update(event) {
     clearTimeout(this.timeout);
 
-    var target = e.target;
+    var target = event.target;
     this.timeout = setTimeout((target) => {
       var url = "https://www.weblio.jp/content/" + target.value;
       var app = this;
@@ -21,7 +21,7 @@ class App extends React.Component {
         app.setState({result: response});
       });
       target.select();
-    }, 700, target);
+    }, 900, target);
   }
   render() {
     return (

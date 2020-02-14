@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "first test in vscode",
+            "name": "debug build.js",
             "skipFiles": [
                 "<node_internals>/**"
             ],
