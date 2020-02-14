@@ -29,6 +29,20 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
+function getFilename(info) {
+  var context = path.join(info.context, "src");
+  var entryPath = path.dirname(info.entryPath);
+  var relativePath = path.relative(context, entryPath);
+  return path.join(relativePath, "[name].js");
+}
+
+function getChunkFilename(info) {
+  var context = path.join(info.context, "src");
+  var entryPath = path.dirname(info.entryPath);
+  var relativePath = path.relative(context, entryPath);
+  return path.join(relativePath, "[name].chunk.js");
+}
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -160,7 +174,7 @@ module.exports = function(webpackEnv) {
       isEnvDevelopment &&
         require.resolve('react-dev-utils/webpackHotDevClient'),
       // Finally, this is your app's code:
-      paths.appIndexJs,
+      path.join(paths.appSrc, "content_scripts/index"),
       // We include the app code last so that if there is a runtime error during
       // initialization, it doesn't blow up the WebpackDevServer client, and
       // changing JS code would still trigger a refresh.
@@ -170,19 +184,18 @@ module.exports = function(webpackEnv) {
       path: isEnvProduction ? paths.appBuild : undefined,
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
-      // I want the filename to include the path info of entry point, should modify this..
+      // dirname(filename) to be generated from the relative path from appSrc to entry's path, should modify this..?
       // https://github.com/webpack/webpack/blob/webpack-4/lib/TemplatedPathPlugin.js
+      //
+      // actually, modified the webpack/lib/Compilation.js!Compilaiton:getPathWithInfo(filename, data)
+      // pass more info to the data parameter
+      // and changed webpack/schemas/WebpackOptions.json!definitions[OutputOptions[properties[chunkFilename]]]
+      // to allow passing function as chunkFilename
       filename: isEnvProduction
-        ? (a, b) => {
-          return "static/js/[name].js"
-        }
+        ? getFilename
         : isEnvDevelopment && 'static/js/bundle.js',
-      // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
-        // ? 'static/js/[name].chunk.js'
-        ? (a, b) => {
-          return "static/js/[name].chunk.js"
-        }
+        ? getChunkFilename
         : isEnvDevelopment && 'static/js/[name].chunk.js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
