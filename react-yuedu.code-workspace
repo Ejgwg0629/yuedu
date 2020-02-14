@@ -15,6 +15,7 @@
 		"debug.node.autoAttach": "on",
 		"search.exclude": {
 			"**/node_modules": false
-		}
+		},
+		"typescript.disableAutomaticTypeAcquisition": true
 	}
 }
