@@ -170,17 +170,17 @@ module.exports = function(webpackEnv) {
       path: isEnvProduction ? paths.appBuild : undefined,
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
-      // There will be one main bundle, and one file per asynchronous chunk.
-      // In development, it does not produce real files.
+      // I want the filename to include the path info of entry point, should modify this..
+      // https://github.com/webpack/webpack/blob/webpack-4/lib/TemplatedPathPlugin.js
       filename: isEnvProduction
         ? 'static/js/[name].js'
         : isEnvDevelopment && 'static/js/bundle.js',
-      // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? 'static/js/[name].chunk.js'
         : isEnvDevelopment && 'static/js/[name].chunk.js',
+      // TODO: remove this when upgrading to webpack 5
+      futureEmitAssets: true,
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
