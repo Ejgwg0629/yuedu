@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules/*
-/node_modules/webpack
+!/node_modules/webpack
 /.pnp
 .pnp.js
 
