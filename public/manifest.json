@@ -31,7 +31,9 @@
         "<all_urls>"
       ],
       "js": [
-        "content_scripts/main.js"
+        "/content_scripts/runtime-main.js",
+        "/content_scripts/2.chunk.js",
+        "/content_scripts/main.chunk.js"
       ],
       "run_at": "document_end",
       "all_frames": false

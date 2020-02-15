@@ -135,5 +135,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "webpack-livereload-plugin": "^2.2.0"
   }
 }

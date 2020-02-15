@@ -12,6 +12,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/scripts/build.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "debug start.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/scripts/start.js"
         }
     ]
 }
