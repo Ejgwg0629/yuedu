@@ -4,7 +4,8 @@ chrome.runtime.onInstalled.addListener(function () {
   console.log("every time runtime.reload");
 });
 
-function getTrans(url, sendResponse) {
+function getTrans(word, sendResponse) {
+  var url = "https://www.weblio.jp/content/" + word;
   var req = new XMLHttpRequest();
   req.open('GET', url);
   req.onload = () => {
@@ -23,7 +24,8 @@ function getTrans(url, sendResponse) {
   req.send();
 }
 
-function getTransFromYoudao(url, sendResponse) {
+function getTransFromYoudao(word, sendResponse) {
+  var url = "https://youdao.com/w/" + word;
   var req = new XMLHttpRequest();
   req.open('GET', url);
   req.onload = () => {
@@ -57,8 +59,10 @@ function parseYoudao(collection) {
     var pronounces = [];
     collection.querySelectorAll(".pronounce").forEach((ele) => {
       pronounces.push({
-        language: ele.firstChild.textContent.replace(/^\s+|\s+$/g, ""),
-        pronounce: ele.querySelector(".phonetic").textContent.replace(/^\s+|\s+$/g, "")
+        language: ele.firstChild != null ? 
+          ele.firstChild.textContent.replace(/^\s+|\s+$/g, "") : "",
+        pronounce: ele.querySelector(".phonetic") != null ?
+          ele.querySelector(".phonetic").textContent.replace(/^\s+|\s+$/g, "") : ""
       })
     });
 
@@ -89,11 +93,26 @@ function parseYoudao(collection) {
   }
 }
 
+class Youdao {
+  constructor(word, sendResponse) {
+    this.word = this.normalize(word);
+    this.sendResponse = sendResponse;
+    this.translateWord();
+  }
+
+  normalize = (word) => {
+    word = word.replace(/^\s+|\s+$/, "");
+    word = word.replace(/\s+/, " ");
+    return word;
+  }
+
+
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request);
 
-
-  getTransFromYoudao(request.msg, sendResponse);
+  getTransFromYoudao(request.word, sendResponse);
 
   return true;
 });

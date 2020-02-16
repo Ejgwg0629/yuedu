@@ -100,10 +100,8 @@ class App extends React.Component {
   }
 
   translateWord = (word) => {
-    var url = "https://youdao.com/w/" + word;
-    // var url = "https://www.weblio.jp/content/" + target.value;
     var app = this;
-    chrome.runtime.sendMessage({msg: url, lanuage: this.state.language}, (response) => {
+    chrome.runtime.sendMessage({word: word, lanuage: this.state.language}, (response) => {
       console.log(app);
       console.log(this);
       app.setState({translation: response});
