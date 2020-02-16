@@ -1,11 +1,36 @@
-.container {
+.yuedu-container-visible {
+    display: flex;
+    flex-direction: column;
+
     position: absolute;
     top: 10px;
     left: 20px;
+    
     width: 326px;
-    height: 125px;
-    display: flex;
-    flex-direction: column;
+    min-height: 125px;
+
     border: 1px solid #E18CEE;
     background-color: #F0C7F7;
+}
+
+.yuedu-container-hidden {
+    display: none;
+}
+
+#yuedu-flex-container > .word {
+    display: flex;
+    height: 20px;
+}
+
+#yuedu-flex-container > .word > input {
+    flex: 1 0 20px;
+}
+
+#yuedu-flex-container > .pronounce {
+    display: flex;
+}
+
+#yuedu-flex-container > .translation {
+    display: flex;
+    flex-direction: column;
 }

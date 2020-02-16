@@ -20,8 +20,7 @@
   "background": {
     "persistent": false,
     "scripts": [
-      "background/main.js",
-      "background/livereload.js"
+      "background/main.js"
     ]
   },
 
@@ -34,6 +33,9 @@
         "/content_scripts/runtime-main.js",
         "/content_scripts/2.chunk.js",
         "/content_scripts/main.chunk.js"
+      ],
+      "css": [
+        "content_scripts/App.css"
       ],
       "run_at": "document_end",
       "all_frames": false

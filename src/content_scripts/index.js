@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './App';
 
 
+const mainNode = document.createElement("div");
+document.body.appendChild(mainNode);
 
-const node = document.createElement("div");
-document.body.appendChild(node);
-render(<App />, node);
+render(<App hidden={true} />, mainNode);
