@@ -20,6 +20,9 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "background/Dict.js",
+      "background/Youdao.js",
+      "background/Weblio.js",
       "background/main.js"
     ]
   },

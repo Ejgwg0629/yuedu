@@ -12,6 +12,9 @@
 		},
 		"[html]": {
 		},
+		"[javascript]": {
+			"editor.tabSize": 2
+		},
 		"debug.node.autoAttach": "on",
 		"search.exclude": {
 			"**/node_modules": false
