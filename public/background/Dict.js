@@ -4,15 +4,28 @@ class Dict {
 	constructor(word, sendResponse) {
 		this.word = this.normalize(word);
 		this.sendResponse = sendResponse;
+
+		this.pronounces = [];
+		this.translations = [];
+		this.result = {
+			word: this.word,
+			status: "initiating",
+			dict: "",
+			pronounces: this.pronounces,
+			translations: this.translations,
+			message: ""
+		}
 	}
 
 	normalize = (word) => {
+		// TODO: assert word is a string
 		word = word.replace(/^\s+|\s+$/, "");
 		word = word.replace(/\s+/, " ");
 		return word;
 	}
 
-	getFromCache = () => {
+	getTranslationFromCache = () => {
+		// TODO: get translation from LocalStorage
 		return null;
 	}
 
@@ -24,35 +37,41 @@ class Dict {
 			if (xhr.status == 200) {
 				var parser = new DOMParser();
 				try {
-					var doc = parser.parseFromString(xhr.response, "text/html");
-					this.sendResponse(this.parseDoc(doc));
+					this.doc = parser.parseFromString(xhr.response, "text/html");
+					this.fallTo("phrsListTab");
+					this.sendResponse(this.result);
 				} catch (err) {
-					console.log(err);
-					this.sendNotFound();
+					this.sendParseError();
 				}
 			}
 		};
 		xhr.onerror = () => {
-			this.sendError();
+			this.sendOnError();
 		};
 		xhr.send();
 	}
 
 	sendNotFound = () => {
-		this.sendResponse({
-			pronounces: [],
-			translations: [{
-				translation: `parse error`
-			}]
-		});
+		this.result.status = "failed";
+		this.result.message = `not found the meaning`
+		this.sendResponse(this.result);
 	}
 
-	sendError = () => {
-		this.sendResponse({
-			pronounces: [],
-			translations: [{
-				translation: `network error ..?`
-			}]
-		});
+	sendParseError = () => {
+		this.result.status = "failed";
+		this.result.message = `failed to parse the page`
+		this.sendResponse(this.result);
+	}
+
+	sendOnError = () => {
+		this.result.status = "failed";
+		this.result.message = `network error ..?`
+		this.sendResponse(this.result);
+	}
+
+	sendFallToError = () => {
+		this.result.status = "failed";
+		this.result.message = `fallTo error..`
+		this.sendResponse(this.result);
 	}
 }

@@ -101,7 +101,7 @@ class App extends React.Component {
 
   translateWord = (word) => {
     var app = this;
-    chrome.runtime.sendMessage({word: word, lanuage: this.state.language}, (response) => {
+    chrome.runtime.sendMessage({word: word, style: this.state.style}, (response) => {
       console.log(app);
       console.log(this);
       app.setState({translation: response});
@@ -109,7 +109,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("App re-rendered");
+    console.log(this.state);
     return (
       <div id="yuedu-flex-container" 
         style={this.state.position}
@@ -120,6 +120,7 @@ class App extends React.Component {
           onInputTimeout={this.onInputTimeout}
           word={this.state.word} 
         />
+
         {this.state.translation.pronounces ? (
           <Pronounce pronounces={this.state.translation.pronounces} />
         ) : false }
@@ -153,7 +154,7 @@ class Pronounce extends React.Component {
     if (this.props.pronounces) {
       pronounces = this.props.pronounces.map((item) => (
         <div>
-          <span>{item.language}</span>
+          <span>{item.style}</span>
           <span>{item.pronounce}</span>
         </div>
       ))
@@ -176,7 +177,7 @@ class Translation extends React.Component {
     if (this.props.translations) {
       translations = this.props.translations.map((item) => (
         <div>
-          <span>{item.PoS}</span>
+          <span className="PoS">{item.PoS}</span>
           <span>{item.translation}</span>
         </div>
       ))

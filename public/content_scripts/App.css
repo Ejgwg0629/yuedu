@@ -24,13 +24,33 @@
 
 #yuedu-flex-container > .word > input {
     flex: 1 0 20px;
+    margin-top: 5px;
 }
 
 #yuedu-flex-container > .pronounce {
     display: flex;
+    width: 90%;
+    align-self: center;
+}
+
+#yuedu-flex-container > .pronounce > div {
+    flex: 1 0 50%;
 }
 
 #yuedu-flex-container > .translation {
     display: flex;
     flex-direction: column;
+}
+
+#yuedu-flex-container > .translation > div {
+    margin-top: 2px;
+    display: inline-flex;
+}
+
+#yuedu-flex-container span.PoS {
+    min-width: 34px;
+    font-size: 0.8em;
+    border: 1px solid #9d56de5e;
+    border-radius: 2.4px;
+    align-self: center;
 }
