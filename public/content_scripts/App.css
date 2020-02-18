@@ -24,12 +24,12 @@
 
 #yuedu-flex-container > .word > input {
     flex: 1 0 20px;
-    margin-top: 5px;
 }
 
 #yuedu-flex-container > .pronounce {
     display: flex;
-    width: 90%;
+    width: 94%;
+    margin-top: 5px;
     align-self: center;
 }
 
