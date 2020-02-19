@@ -1,6 +1,7 @@
 .yuedu-container-visible {
     display: flex;
     flex-direction: column;
+    z-index: 2147483647;
 
     position: absolute;
     top: 10px;
@@ -15,6 +16,11 @@
 
 .yuedu-container-hidden {
     display: none;
+}
+
+#yuedu-flex-container {
+    font-size: 14px;
+    font-family: "Source Han Serif SC", "Cica", "あずきフォント";
 }
 
 #yuedu-flex-container > .word {
@@ -40,6 +46,7 @@
 #yuedu-flex-container > .translation {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 
 #yuedu-flex-container > .translation > div {
@@ -47,10 +54,12 @@
     display: inline-flex;
 }
 
-#yuedu-flex-container span.PoS {
+#yuedu-flex-container > .translation > div > span.PoS {
     min-width: 34px;
     font-size: 0.8em;
     border: 1px solid #9d56de5e;
     border-radius: 2.4px;
-    align-self: center;
+    align-self: flex-start;
+    position: relative;
+
 }

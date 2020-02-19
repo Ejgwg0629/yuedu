@@ -20,7 +20,7 @@ class Dict {
 	normalize = (word) => {
 		// TODO: assert word is a string
 		word = word.replace(/^\s+|\s+$/, "");
-		word = word.replace(/\s+/, " ");
+		word = word.replace(/\s+/g, " ");
 		return word;
 	}
 

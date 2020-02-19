@@ -25,9 +25,9 @@ class Youdao extends Dict {
 			return this.sendFallToError();
 		}
 
-		select = this["parse" + select.charAt(0).toUpperCase() + select.slice(1)];
 		try {
-			select.call(this, trans);
+			var parser = this["parse" + select.charAt(0).toUpperCase() + select.slice(1)];
+			parser(trans);
 		} catch(err) {
 			return this.sendFallToError();
 		}
@@ -66,11 +66,13 @@ class Youdao extends Dict {
 			}
 			var lis = phrsListTrans.getElementsByTagName("li");
 			Array.from(lis).forEach((ele) => {
-				node = ele.textContent || "";
-				this.translations.push({
-					PoS: node.replace(/^(\w+\.)(.*)$/, "$1"),
-					translation: node.replace(/^(\w+\.)(.*)$/, "$2").replace(/^\s+|\s+$/g, "")
-				})
+				node = (ele.textContent || "").match(/^(\w+\.)(.*)$/);
+				if (node != null) {
+					this.translations.push({
+						PoS: node[1],
+						translation: node[2].replace(/^\s+|\s+$/g, "")
+					})
+				}
 			});
 		} catch (err) {
 			console.log(`failed to parse '.trans-container'`);
