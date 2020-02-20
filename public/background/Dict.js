@@ -51,6 +51,26 @@ class Dict {
 		xhr.send();
 	}
 
+	fallTo = (select) => {
+		var doc = this.doc;
+		var trans;
+		if (/^[#\.]/.test(select)) {
+			trans = doc.querySelector(select);
+			select = select.substring(1);
+		} else if (/^\w/.test(select)) {
+			trans = doc.getElementById(select);
+		} else {
+			return this.sendFallToError();
+		}
+
+		try {
+			var parser = this["parse" + select.charAt(0).toUpperCase() + select.slice(1)];
+			parser(trans);
+		} catch(err) {
+			return this.sendFallToError();
+		}
+	}
+
 	sendNotFound = () => {
 		this.result.status = "failed";
 		this.result.message = `not found the meaning`

@@ -13,27 +13,6 @@ class Youdao extends Dict {
 		}
 	}
 
-	fallTo = (select) => {
-		var doc = this.doc;
-		var trans;
-		if (/^[#\.]/.test(select)) {
-			trans = doc.querySelector(select);
-			select = select.substring(1);
-		} else if (/^\w/.test(select)) {
-			trans = doc.getElementById(select);
-		} else {
-			return this.sendFallToError();
-		}
-
-		try {
-			var parser = this["parse" + select.charAt(0).toUpperCase() + select.slice(1)];
-			parser(trans);
-		} catch(err) {
-			return this.sendFallToError();
-		}
-		
-	}
-
 	parsePhrsListTab = (phrsList) => {
 		if (phrsList == null) {
 			return this.fallTo("webTrans");
@@ -71,6 +50,11 @@ class Youdao extends Dict {
 					this.translations.push({
 						PoS: node[1],
 						translation: node[2].replace(/^\s+|\s+$/g, "")
+					})
+				} else {
+					this.translations.push({
+						PoS: "",
+						translation: node.replace(/^\s+|\s+$/g, "")
 					})
 				}
 			});
