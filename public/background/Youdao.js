@@ -52,6 +52,7 @@ class Youdao extends Dict {
 						translation: node[2].replace(/^\s+|\s+$/g, "")
 					})
 				} else {
+					node = ele.textContent;
 					this.translations.push({
 						PoS: "",
 						translation: node.replace(/^\s+|\s+$/g, "")
