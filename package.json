@@ -137,6 +137,7 @@
     ]
   },
   "devDependencies": {
+    "node-sass": "^4.13.1",
     "webpack-livereload-plugin": "^2.2.0"
   }
 }

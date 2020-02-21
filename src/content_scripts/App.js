@@ -1,6 +1,7 @@
 /* global chrome */
 import React from 'react';
 import Input from './Input';
+import style from './style.sass';
 
 
 class App extends React.Component {

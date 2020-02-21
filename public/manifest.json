@@ -38,7 +38,7 @@
         "/content_scripts/main.chunk.js"
       ],
       "css": [
-        "content_scripts/App.css"
+        "content_scripts/main.chunk.css"
       ],
       "run_at": "document_end",
       "all_frames": false

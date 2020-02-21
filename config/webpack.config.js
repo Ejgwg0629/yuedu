@@ -44,6 +44,13 @@ function getChunkFilename(info) {
   return path.join(relativePath, "[name].chunk.js");
 }
 
+function getCssChunkFilename(info) {
+  var context = path.join(info.context, "src");
+  var entryPath = path.dirname(info.entryPath);
+  var relativePath = path.relative(context, entryPath);
+  return path.join(relativePath, "[name].chunk.css");
+}
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -83,7 +90,7 @@ module.exports = function(webpackEnv) {
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
   const shouldUseRelativeAssetPaths = publicPath === './';
-
+  
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -598,7 +605,7 @@ module.exports = function(webpackEnv) {
           // Options similar to the same options in webpackOptions.output
           // both options are optional
           filename: 'static/css/[name].css',
-          chunkFilename: 'static/css/[name].chunk.css',
+          chunkFilename: getCssChunkFilename,
         }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
