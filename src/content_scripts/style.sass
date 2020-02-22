@@ -1,66 +1,114 @@
-.yuedu-container-visible 
-    display: flex
-    flex-direction: column
-    z-index: 2147483647
+#cr1315-yuedu-container
 
-    position: absolute
-    top: 10px
-    left: 20px
-    
-    width: 326px
-    min-height: 125px
+    // reset our components
+    div, input
+        margin: 0
+        padding: 0
+        border: 0
+        outline: 0
+        
+        line-height: 16px
+        font-size: 14px
 
-    border: 1px solid #E18CEE
-    background-color: #F0C7F7
+        color: #6E7E84
+        font-family: "Source Han Serif SC", "Cica", "あずきフォント"
+
+    #yuedu-container
+        width: 340px
+        min-height: 140px
+        z-index: 6660
+
+        background-image: url(grid_18.jpg)
+        background-color: #F0C7F7
+
+        box-shadow: 20px 38px 34px -26px hsla(0, 0, 0, 0.4)
+        border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px
+        border: solid 1.5px #E18CEE
+
+    #yuedu-container::after
+        content: ""
+        border-radius: 5px
+        z-index: 98
+        width: 100%
+        height: 100%
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
+        opacity: 0
+        -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
+        transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
+        
+
+    .yuedu-container-visible
+        display: flex
+        flex-direction: column
+        position: absolute
+        justify-content: center
+
+    .yuedu-container-hidden
+        display: none
+
+        display: flex
+        flex-direction: column
+        position: absolute
+        // justify-content: center
+        align-items: center
+
+    #yuedu-container
+        .word
+            display: flex
+            margin-top: 14px
+
+            width: 94%
+            height: 20px
+                
+            input
+                display: block
+                padding-left: 2.1em
+
+                background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.33333 7.33333H7.80667L7.62 7.15333C8.27333 6.39333 8.66667 5.40667 8.66667 4.33333C8.66667 1.94 6.72667 0 4.33333 0C1.94 0 0 1.94 0 4.33333C0 6.72667 1.94 8.66667 4.33333 8.66667C5.40667 8.66667 6.39333 8.27333 7.15333 7.62L7.33333 7.80667V8.33333L10.6667 11.66L11.66 10.6667L8.33333 7.33333ZM4.33333 7.33333C2.67333 7.33333 1.33333 5.99333 1.33333 4.33333C1.33333 2.67333 2.67333 1.33333 4.33333 1.33333C5.99333 1.33333 7.33333 2.67333 7.33333 4.33333C7.33333 5.99333 5.99333 7.33333 4.33333 7.33333Z' fill='%236E7E84'/%3E%3C/svg%3E")
+                background-repeat: no-repeat
+                background-size: 13px
+                background-position: 0.5em center
+
+                font-family: monospace
+
+                flex: 1 0 1vh
+                border-radius: 0.1rem
+                transition: box-shadow 300ms
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35)
+
+        .pronounce
+            display: flex
+            width: 86%
+            margin-top: 8px
 
 
-.yuedu-container-hidden 
-    display: none
+            div
+                flex: 1 0 50%
+                font-family: monospace
 
+        
+        .translation
+            display: flex
+            width: 90%
+            flex-direction: column
+            margin: 14px 0 8px
 
-#yuedu-flex-container 
-    font-size: 14px
-    font-family: "Source Han Serif SC", "Cica", "あずきフォント"
+            div
+                
+                display: inline-flex
+                line-height: 18px
 
+                span.PoS
+                    min-width: 3em
+                    font-size: 0.8em
+                    font-family: monospace
 
-#yuedu-flex-container > .word 
-    display: flex
-    height: 20px
+                    align-self: flex-start
+                    position: relative
+                    top: 0.3em
 
-
-#yuedu-flex-container > .word > input 
-    flex: 1 0 20px
-    margin: 0
-
-
-#yuedu-flex-container > .pronounce 
-    display: flex
-    width: 94%
-    margin-top: 5px
-    align-self: center
-
-
-#yuedu-flex-container > .pronounce > div 
-    flex: 1 0 50%
-
-
-#yuedu-flex-container > .translation 
-    display: flex
-    flex-direction: column
-    margin-bottom: 5px
-
-
-#yuedu-flex-container > .translation > div 
-    margin-top: 2px
-    display: inline-flex
-
-
-#yuedu-flex-container > .translation > div > span.PoS 
-    min-width: 34px
-    font-size: 0.8em
-    border: 1px solid #9d56de5e
-    border-radius: 2.4px
-    align-self: flex-start
-    position: relative
-
-
+                    span
+                        padding: 0.05em 0.2em
+                        background-color: #333
+                        color: #ccc
+                        

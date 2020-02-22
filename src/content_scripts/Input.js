@@ -21,12 +21,12 @@ class Input extends React.Component {
 		console.log("Input re-rendered");
 		return (
 			<div className="word">
-				<input
-					type="text"
-					onMouseOver={(e) => { e.target.select(); }}
-					onChange={this.handleChange}
-					value={this.props.word} >
-				</input>
+					<input
+						type="text"
+						onMouseOver={(e) => { e.target.select(); }}
+						onChange={this.handleChange}
+						value={this.props.word} >
+					</input>
 
 
 			</div>

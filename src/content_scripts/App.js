@@ -1,7 +1,7 @@
 /* global chrome */
 import React from 'react';
 import Input from './Input';
-import style from './style.sass';
+import './style.sass';
 
 
 class App extends React.Component {
@@ -96,7 +96,7 @@ class App extends React.Component {
     if (left + width > window.innerWidth) {
       left = window.innerWidth - width - 10;
     }
-    var top = window.pageYOffset + range.y + 20;
+    var top = window.pageYOffset + range.y + range.height + 5;
     return {top: top, left: left}
   }
 
@@ -112,7 +112,7 @@ class App extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <div id="yuedu-flex-container" 
+      <div id="yuedu-container" 
         style={this.state.position}
         className={ this.state.hidden ? "yuedu-container-hidden" : "yuedu-container-visible" }>
         
@@ -131,6 +131,7 @@ class App extends React.Component {
         ) : false}
 
       </div>
+
     )
   }
 
@@ -141,7 +142,7 @@ class App extends React.Component {
   }
 
   onInputTimeout = (word) => {
-    // keep a last word to compare with ?
+    // keep last word to compare with ?
     this.translateWord(word);
   }
 }
@@ -153,8 +154,8 @@ class Pronounce extends React.Component {
 
     var pronounces;
     if (this.props.pronounces) {
-      pronounces = this.props.pronounces.map((item) => (
-        <div>
+      pronounces = this.props.pronounces.map((item, i) => (
+        <div key={i}>
           <span>{item.style}</span>
           <span>{item.pronounce}</span>
         </div>
@@ -176,9 +177,9 @@ class Translation extends React.Component {
 
     var translations;
     if (this.props.translations) {
-      translations = this.props.translations.map((item) => (
-        <div>
-          <span className="PoS">{item.PoS}</span>
+      translations = this.props.translations.map((item, i) => (
+        <div key={i}>
+          <span className="PoS"><span>{item.PoS}</span></span>
           <span>{item.translation}</span>
         </div>
       ))
