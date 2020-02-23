@@ -18,7 +18,9 @@ class Dict {
 	}
 
 	normalize = (word) => {
-		// TODO: assert word is a string
+		if (! word || typeof(word) !== "string") {
+			return "";
+		}
 		word = word.replace(/^\s+|\s+$/, "");
 		word = word.replace(/\s+/g, " ");
 		return word;

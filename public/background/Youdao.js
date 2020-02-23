@@ -29,9 +29,9 @@ class Youdao extends Dict {
 			phrsList.querySelectorAll(".pronounce").forEach((ele) => {
 				this.pronounces.push({
 					style: (node = ele.firstChild) &&
-						node.textContent.replace(/^\s+|\s+$/g, "") || "",
+						this.normalize(node.textContent) || "",
 					pronounce: (node = ele.querySelector(".phonetic")) &&
-						node.textContent.replace(/^\s+|\s+$/g, "") || ""
+						this.normalize(node.textContent) || ""
 				})
 			});
 		} catch(err) {
@@ -49,18 +49,26 @@ class Youdao extends Dict {
 				if (node != null) {
 					this.translations.push({
 						PoS: node[1],
-						translation: node[2].replace(/^\s+|\s+$/g, "")
+						translation: this.normalize(node[2])
 					})
 				} else {
 					this.translations.push({
 						PoS: "",
-						translation: node.replace(/^\s+|\s+$/g, "")
+						translation: this.normalize(node)
 					})
 				}
 			});
 		} catch (err) {
 			console.log(`failed to parse '.trans-container'`);
 		}
+	}
+
+	parseErrorWrapper = (typoList) => {
+		if (! typoList) {
+
+		}
+
+
 	}
 
 	parseWebTrans = (webTransList) => {
@@ -74,7 +82,7 @@ class Youdao extends Dict {
 				this.translations.push({
 					PoS: "",
 					translation: (node = ele.firstElementChild) &&
-						node.textContent.replace(/^\s+|\s+$/g, "") || ""
+						this.normalize(node.textContent) || ""
 				})
 			})
 		} catch(err) {
