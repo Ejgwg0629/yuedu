@@ -60,7 +60,7 @@ class App extends React.Component {
         }
       }
     } else {
-      if (event.target.closest("#yuedu-flex-container") != null) {
+      if (event.target.closest("#yuedu-container") != null) {
         return;
       } else {
         if (this.state.hidden === false) {
@@ -73,7 +73,7 @@ class App extends React.Component {
   }
 
   shouldUpdatePosition(target, selection) {
-    if (target.closest("#yuedu-flex-container") != null) {
+    if (target.closest("#yuedu-container") != null) {
       return false;
     }
     var testElement;
@@ -83,7 +83,7 @@ class App extends React.Component {
     } else {
       testElement = selection.anchorNode;
     }
-    if (testElement.closest("#yuedu-flex-container") != null) {
+    if (testElement.closest("#yuedu-container") != null) {
       // mouseUp is triggered but is no business with us
       return false;
     }
