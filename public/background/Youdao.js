@@ -52,6 +52,7 @@ class Youdao extends Dict {
 						translation: this.normalize(node[2])
 					})
 				} else {
+					node = ele.textContent;
 					this.translations.push({
 						PoS: "",
 						translation: this.normalize(node)
