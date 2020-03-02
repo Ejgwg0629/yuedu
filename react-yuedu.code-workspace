@@ -19,6 +19,7 @@
 		"search.exclude": {
 			"**/node_modules": false
 		},
-		"typescript.disableAutomaticTypeAcquisition": true
+		"typescript.disableAutomaticTypeAcquisition": true,
+		"editor.fontFamily": "'Noto Sans Mono CJK JP Regular'"
 	}
 }
